@@ -23,7 +23,7 @@ Install `node.js`, open the terminal and run `npm i` to install the packages bel
 
 
 ## Screenshot of Deployed Application
-![screenshot](./fitness-tracker.png)
+![screenshot](./fitness-tracker.png) 
 
 
 ## Built With
