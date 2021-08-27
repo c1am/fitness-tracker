@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { Workout } = require("../models");
+const { workout } = require("../models");
 
 router.get("/api/workouts", async (req, res) => {
-  Workout.aggregate([
+  workout.aggregate([
     {
       $addFields: {
         totalDuration: { $sum: "$exercises.duration", },
@@ -18,7 +18,7 @@ router.get("/api/workouts", async (req, res) => {
 });
 
 router.post("/api/workouts", ({body}, res) => {
-  Workout.create({body})
+  workout.create({body})
     .then((workoutData) => {
       res.json(workoutData);
     })
@@ -29,7 +29,7 @@ router.post("/api/workouts", ({body}, res) => {
 
 router.put("/api/workouts/:id", ({body}, res) => {
 
-  Workout.findByIdToUpdate( 
+  workout.findByIdToUpdate( 
     req.params.id,
     { $push: { exercises: req.body}},
     { new: true, runValidators: true })
@@ -42,7 +42,7 @@ router.put("/api/workouts/:id", ({body}, res) => {
 });
 
 router.get("/api/workouts/range", async (req, res) => {
-  Workout.aggregate([
+  workout.aggregate([
     {
       $addFields: {
         totalDuration: 
@@ -61,7 +61,7 @@ router.get("/api/workouts/range", async (req, res) => {
 });
 
 router.delete('/api/workouts',({ body }, res) =>{
-  Workout.findByIdToDelete(body.id)
+  workout.findByIdToDelete(body.id)
   .then(() =>{
     res.json(true);
   })
